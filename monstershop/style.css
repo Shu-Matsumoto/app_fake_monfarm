@@ -1,0 +1,25 @@
+body {
+  min-height: 100vh;
+  font-size: 20px;
+}
+
+.monster_information_area {
+  width: 100%;
+  min-height: 100vh;
+  display:flex;
+  flex-direction: column;
+}
+
+.profile_items{
+  list-style: none;
+  display: flex;
+}
+
+.profile_item{
+  display: flex;
+  margin: 0px 10px;
+}
+
+.profile_item p{
+  margin: 0px 5px;
+}
