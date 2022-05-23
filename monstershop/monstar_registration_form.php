@@ -7,11 +7,14 @@
     <title>モンスター情報登録</title>
   </head>
   <body>
-     <form action="monstar_registration.php" method="POST">
+     <form action="./monstar_registration.php" method="POST" enctype="multipart/form-data">
     <fieldset>
       <legend>モンスター情報登録</legend>
       <div>
         名前: <input type="text" name="name">
+      </div>
+      <div>
+        プロフィール画像(16MBまで): <input type="file" name="profileImageUrl">
       </div>
       <div>
         誕生日: <input type="date" name="birthday">
