@@ -13,7 +13,7 @@ try {
 }
 
 // SQL作成&実行
-//$sql = "SELECT ".$DB_TABLE_PRIMARY_KEY." FROM ".$DB_TABLE_NAME;
+//$sql = "SELECT ".$DB_TABLE_PRIMARY_KEY." FROM ".$DB_TABLE_NAME."";
 $sql = "SELECT `name` FROM `monster_ability`";
 $stmt = $pdo->prepare($sql);
 

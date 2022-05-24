@@ -5,31 +5,30 @@ header('Content-Type: application/json; charset=utf-8');
 // 外部ファイルのインクルード
 require("./monsterDataBaseDef.php");
 
-$fileName = $_POST["channelName"] . ".csv";
-
-// ファイルオープン
-$file = fopen($CHANNELS_DIR."/".$fileName, "r");
-
-// ファイルロック・・・ファイル排他制御
-flock($file, LOCK_EX);
-
-$contentsArray = array();
-if ($file) {
-  // 読み込めなくなるまで読み込み、末尾に読み込んだ文字列を連結する
-  while ($line = fgetcsv($file)) {
-    array_push($contentsArray, $line);
-  }
+try {
+  $pdo = new PDO($DB_SERVER, $DB_ACCESS_USER, $DB_ACCESS_PWD);
+} catch (PDOException $e) {
+  echo json_encode(["db error" => "{$e->getMessage()}"]);
+  exit();
 }
 
-// ファイルロック解除
-flock($file, LOCK_UN);
+// SQL作成&実行
+$sql = "SELECT * FROM `monster_ability` WHERE name = \"".$_POST["monsterName"]."\"";
+//$sql = "SELECT * FROM `monster_ability` WHERE name = \"ティラノサウルス\"";
+$stmt = $pdo->prepare($sql);
 
-// ファイルクローズ
-fclose($file);
+try {
+  $status = $stmt->execute();
+} catch (PDOException $e) {
+  echo json_encode(["sql error" => "{$e->getMessage()}"]);
+  exit();
+}
+
+$ability = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $output = [
-  "channelName" => $_POST["channelName"],
-  "contentsArray" => $contentsArray,
+  "monsterAbility" => $ability,
+  "sqlStr" => $sql,
   "result" => "NORMAL_END"
 ];
 

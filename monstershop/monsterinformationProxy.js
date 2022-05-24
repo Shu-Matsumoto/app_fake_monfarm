@@ -21,7 +21,7 @@ export class ContentProxy {
     // awaitしないと正常に戻り値が返らない
     let result = await axios.post(SERVER_URL + SCRIPT_PATH + "getMonsterInformation.php", params)
     //console.log(result.data);
-    return result.data.contentsArray;
+    return result.data.monsterAbility;
   }
 
 }

@@ -22,7 +22,7 @@
       </div>
       <div class="monster_information_area">
         <div class="profile_disp_area">
-          <ul class="profile_items">
+          <ul class="profile_items" id="id_profile_items">
             <li class="profile_item">
               <p class="profile_item_title">名前</p>
               <p class="profile_item_value">バルボサ</p>
@@ -34,7 +34,7 @@
           </ul>
         </div>
         <div class="ability_disp_area">
-          <table>
+          <table id="id_monster_ability_items">
             <tr class="ability_item">
               <th>ライフ:</th>
               <td id="ability_life">105</td>
@@ -70,6 +70,9 @@
     <script type="module">
       import { AppData } from "./appDataDef.js";
       import { ContentProxy } from "./monsterinformationProxy.js";
+
+      // アプリ状態を記憶するインスタンス
+      let appData = new AppData("", ""); 
 
       // チャンネルリストの更新
       function updateMonsterList() {
@@ -112,33 +115,74 @@
 
       // コンテンツアップデート
     function updateContents(monsterName) {
-      // 指定したチャンネルのコンテンツリストを取得
-      ContentProxy.GetChannelContents(channelName).then((contentsList) => {
-        // 親要素
-        var list = document.getElementById("id_channelContentsUl");
-        // リスト初期化
-        while (list.firstChild) {
-          list.removeChild(list.firstChild);
-        }
+      
+      // データラベル
+      const dataLabels = {
+        name:"名前", 
+        profileImageUrl:"画像",
+        birthday:"誕生日",
+        sellingPrice:"売値",
+        life:"ライフ",
+        power:"パワー",
+        durability:"頑丈さ",
+        hit:"命中",
+        evasion:"回避",
+        intelligence:"賢さ"
+      };
 
-        //console.log(contentsList);
-        contentsList.forEach((element) => {
-          //console.log(element);
-          // 追加するチャンネル要素を作成
-          var li = document.createElement("li");
-          //console.log(element);
-          let string = "<tr><td><span style='color:gray'>";
-          string += element[1] + " / " + element[0];
-          string += "</span><br>";
-          string +=
-            "<p style='font-size:larger'>" + element[2] + "</p></td></tr>";
-          li.innerHTML = string; //element;
-          li.className = "channelContentsItem";
-          // valueにlistの子要素数をセットして識別する
-          li.value = list.childElementCount;
-          // 末尾に追加
-          list.appendChild(li);
+      // 指定したチャンネルのコンテンツリストを取得
+      ContentProxy.GetMonsterInformation(monsterName).then((contentsList) => {
+        // 親要素(プロフィール)
+        var profileList = document.getElementById("id_profile_items");
+        // リスト初期化
+        while (profileList.firstChild) {
+          profileList.removeChild(profileList.firstChild);
+        }
+        let profileString = "";
+
+        // 親要素(能力プロフィール)
+        var abilityList = document.getElementById("id_monster_ability_items");
+        // リスト初期化
+        while (abilityList.firstChild) {
+          abilityList.removeChild(abilityList.firstChild);
+        }
+        let abilityString = "";
+
+        console.log(contentsList[0]);
+        Object.keys(contentsList[0]).forEach((key) => {
+          console.log(key);
+
+          if (key == "name" || key == "birthday"){
+            profileString += "<li class='profile_item'>";
+            profileString += "<p class='profile_item_title'>"+ dataLabels[key] +"</p>";
+            profileString += "<p class='profile_item_value'>" + contentsList[0][key] + "</p></li>";
+          } else if(key == "profileImageUrl"){
+
+          } else{
+            abilityString += "<tr class='ability_item'>";
+            abilityString += "<th>かしこさ:</th>"
+            abilityString += "<td id='ability_intelligence'>543</td></tr>"
+          }
         });
+        profileList.innerHTML = profileString;
+        abilityList.innerHTML = abilityString;
+        // contentsList.forEach((element) => {
+        //   //console.log(element);
+        //   // 追加するチャンネル要素を作成
+        //   var li = document.createElement("li");
+        //   //console.log(element);
+        //   let string = "<tr><td><span style='color:gray'>";
+        //   string += element[1] + " / " + element[0];
+        //   string += "</span><br>";
+        //   string +=
+        //     "<p style='font-size:larger'>" + element[2] + "</p></td></tr>";
+        //   li.innerHTML = string; //element;
+        //   li.className = "channelContentsItem";
+        //   // valueにlistの子要素数をセットして識別する
+        //   li.value = list.childElementCount;
+        //   // 末尾に追加
+        //   list.appendChild(li);
+        // });
       });
     }
     </script>
