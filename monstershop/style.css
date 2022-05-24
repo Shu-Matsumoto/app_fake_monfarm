@@ -10,7 +10,7 @@ main{
 }
 
 .monster_list_area {
-  width: 30%;
+  width: 20%;
   min-height: 100vh;
   border-style: solid;
   border-width: 1px;
@@ -36,7 +36,7 @@ main{
 }
 
 .monster_information_area {
-  width: 70%;
+  width: 80%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -50,8 +50,18 @@ main{
 .profile_item {
   display: flex;
   margin: 0px 10px;
-} */
+}
 
 .profile_item p {
   margin: 0px 5px;
+}
+
+.ability_item {
+  display: flex;
+  align-items: center;
+  margin: 0px 10px;
+}
+
+.ability_item p{
+  margin: 0px 10px;
 }

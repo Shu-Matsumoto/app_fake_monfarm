@@ -14,52 +14,19 @@
         <div class="monsterList">
           <ul class="monsterListUl" id="id_monsterListUl">
             モンスターリスト
-            <li class="monsterListItem">ティラノサウルス</li>
+            <!-- <li class="monsterListItem">ティラノサウルス</li>
             <li class="monsterListItem">インドミナスレックス</li>
-            <li class="monsterListItem">インドラプトル</li>
+            <li class="monsterListItem">インドラプトル</li> -->
           </ul>
         </div>
       </div>
       <div class="monster_information_area">
         <div class="profile_disp_area">
           <ul class="profile_items" id="id_profile_items">
-            <li class="profile_item">
-              <p class="profile_item_title">名前</p>
-              <p class="profile_item_value">バルボサ</p>
-            </li>
-            <li class="profile_item" id="profile_birthday">
-              <p class="profile_item_title">誕生日</p>
-              <p class="profile_item_value">2022年/5/24日</p>
-            </li>
           </ul>
         </div>
         <div class="ability_disp_area">
           <table id="id_monster_ability_items">
-            <tr class="ability_item">
-              <th>ライフ:</th>
-              <td id="ability_life">105</td>
-            </tr>
-            <tr class="ability_item">
-              <th>パワー:</th>
-              <td id="ability_power">16</td>
-            </tr>
-            <tr class="ability_item">
-              <th>丈夫さ:</th>
-              <td id="ability_durability">57</td>
-            </tr>
-            <tr class="ability_item">
-              <th>命中:</th>
-              <td id="ability_hit">318</td>
-            </tr>
-            <tr class="ability_item">
-              <th>回避:</th>
-              <td id="ability_evasion">328</td>
-            </tr>
-            <tr class="ability_item">
-              <th>かしこさ:</th>
-              <td id="ability_intelligence">543</td>
-            </tr>
-          </ul>
         </div>
       </div>
     </main>
@@ -118,16 +85,27 @@
       
       // データラベル
       const dataLabels = {
-        name:"名前", 
-        profileImageUrl:"画像",
-        birthday:"誕生日",
-        sellingPrice:"売値",
+        name:"名前　", 
+        profileImageUrl:"画像　",
+        birthday:"誕生日　",
+        sellingPrice:"売値　",
         life:"ライフ",
         power:"パワー",
         durability:"頑丈さ",
-        hit:"命中",
-        evasion:"回避",
-        intelligence:"賢さ"
+        hit:"命中　",
+        evasion:"回避　",
+        intelligence:"賢さ　"
+      };
+
+      // メーター閾値
+      const meterThresholds = {
+        sellingPrice:[1500,600,1000],
+        life:[500,300,400],
+        power:[500,300,400],
+        durability:[500,300,40],
+        hit:[100,60,80],
+        evasion:[200,120,60],
+        intelligence:[500,300,400]
       };
 
       // 指定したチャンネルのコンテンツリストを取得
@@ -148,41 +126,31 @@
         }
         let abilityString = "";
 
-        console.log(contentsList[0]);
-        Object.keys(contentsList[0]).forEach((key) => {
+        console.log(contentsList);
+        Object.keys(contentsList).forEach((key) => {
           console.log(key);
 
           if (key == "name" || key == "birthday"){
             profileString += "<li class='profile_item'>";
-            profileString += "<p class='profile_item_title'>"+ dataLabels[key] +"</p>";
-            profileString += "<p class='profile_item_value'>" + contentsList[0][key] + "</p></li>";
+            profileString += "<p class='profile_item_title'>" + dataLabels[key] +"</p>";
+            profileString += "<p class='profile_item_value'>" + contentsList[key] + "</p></li>";
           } else if(key == "profileImageUrl"){
-
+            console.log('url("./images/' + contentsList[key] + '")');
+            // 背景画像を選択されたモンスター画像に変更
+            $('.monster_information_area').css({
+              backgroundImage: 'url("./images/' + contentsList[key] + '")'
+            });
           } else{
-            abilityString += "<tr class='ability_item'>";
-            abilityString += "<th>かしこさ:</th>"
-            abilityString += "<td id='ability_intelligence'>543</td></tr>"
+            abilityString += "<div class='ability_item'>";
+            abilityString += "<p>" + dataLabels[key] + ":</p>";
+            abilityString += "<p>" + contentsList[key] + "</p>";
+            // abilityString += '<meter max="100" low="60" high="80" value="' + contentsList[key] + '"></meter></div>';
+            abilityString += '<meter max="' + meterThresholds[key][0] + 
+            '" low="' + meterThresholds[key][1] + '" high="' + meterThresholds[key][1] + '" value="' + contentsList[key] + '"></meter></div>';
           }
         });
         profileList.innerHTML = profileString;
         abilityList.innerHTML = abilityString;
-        // contentsList.forEach((element) => {
-        //   //console.log(element);
-        //   // 追加するチャンネル要素を作成
-        //   var li = document.createElement("li");
-        //   //console.log(element);
-        //   let string = "<tr><td><span style='color:gray'>";
-        //   string += element[1] + " / " + element[0];
-        //   string += "</span><br>";
-        //   string +=
-        //     "<p style='font-size:larger'>" + element[2] + "</p></td></tr>";
-        //   li.innerHTML = string; //element;
-        //   li.className = "channelContentsItem";
-        //   // valueにlistの子要素数をセットして識別する
-        //   li.value = list.childElementCount;
-        //   // 末尾に追加
-        //   list.appendChild(li);
-        // });
       });
     }
     </script>

@@ -24,7 +24,7 @@ try {
   exit();
 }
 
-$ability = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$ability = $stmt->fetch(PDO::FETCH_ASSOC);
 
 $output = [
   "monsterAbility" => $ability,
