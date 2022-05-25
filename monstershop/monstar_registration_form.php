@@ -10,6 +10,7 @@
      <form action="./monstar_registration.php" method="POST" enctype="multipart/form-data">
     <fieldset>
       <legend>モンスター情報登録</legend>
+      <a href="./registered_monster_read.php">一覧画面</a>
       <div>
         名前: <input type="text" name="name">
       </div>
