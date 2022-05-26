@@ -21,7 +21,7 @@ foreach ($result as $record) {
   $output .= "
     <tr>
       <td>{$record["name"]}</td>
-      <td>-</td>
+      <td><img src='./thumbnail.php?imagePath=images/{$record["profileImageUrl"]}'></td>
       <td>{$record["birthday"]}</td>
       <td>{$record["sellingPrice"]}</td>
       <td>{$record["life"]}</td>
@@ -31,10 +31,10 @@ foreach ($result as $record) {
       <td>{$record["evasion"]}</td>
       <td>{$record["intelligence"]}</td>
       <td>
-        <a href='user_edit.php?id={$record["name"]}'>edit</a>
+        <a href='registered_monster_edit.php?name={$record["name"]}'>edit</a>
       </td>
       <td>
-        <a href='user_delete.php?id={$record["name"]}'>delete</a>
+        <a href='registered_monster_delete.php?name={$record["name"]}'>delete</a>
       </td>
     </tr>
   ";
@@ -74,6 +74,7 @@ foreach ($result as $record) {
       </thead>
       <tbody>
         <?= $output ?>
+        <img src='./thumbnail.php'>
       </tbody>
     </table>
   </fieldset>
