@@ -37,10 +37,7 @@ $record = $stmt->fetch(PDO::FETCH_ASSOC);
       <legend>登録済モンスター情報リスト（編集画面）</legend>
       <a href="registered_monster_read.php">一覧画面</a>
       <div>
-        名前: <input type="text" name="name" value="<?= $record['name']?>" disabled>
-      </div>
-      <div>
-        プロフィール画像(16MBまで): <input type="file" name="profileImageUrl">
+        名前: <input type="text" name="name" value="<?= $record['name']?>" readonly>
       </div>
       <div>
         誕生日: <input type="date" name="birthday" value="<?= $record['birthday'] ?>">

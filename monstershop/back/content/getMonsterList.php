@@ -2,15 +2,9 @@
 header("Access-Control-Allow-Origin: *");
 header('Content-Type: application/json; charset=utf-8');
 
-// 外部ファイルのインクルード
-require("./monsterDataBaseDef.php");
-
-try {
-  $pdo = new PDO($DB_SERVER, $DB_ACCESS_USER, $DB_ACCESS_PWD);
-} catch (PDOException $e) {
-  echo json_encode(["db error" => "{$e->getMessage()}"]);
-  exit();
-}
+include("./dataBaseCommon.php");
+// DB接続
+$pdo = ConnectToDB();
 
 // SQL作成&実行
 //$sql = "SELECT ".$DB_TABLE_PRIMARY_KEY." FROM ".$DB_TABLE_NAME."";

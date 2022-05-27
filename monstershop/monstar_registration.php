@@ -1,4 +1,6 @@
 <?php
+include("./back/content/dataBaseCommon.php");
+
 // POSTデータ確認
 if (
   !isset($_POST['name']) || $_POST['name']=='' ||
@@ -32,18 +34,7 @@ $image .= '.'.substr(strrchr($_FILES['profileImageUrl']['name'], '.'), 1);
 $file = "images/$image";
 
 // DB接続
-// 各種項目設定
-$dbn ='mysql:dbname=app_fake_monfarm;charset=utf8mb4;port=3306;host=localhost';
-$user = 'root';
-$pwd = '';
-
-// DB接続
-try {
-  $pdo = new PDO($dbn, $user, $pwd);
-} catch (PDOException $e) {
-  echo json_encode(["db error" => "{$e->getMessage()}"]);
-  exit();
-}
+$pdo = ConnectToDB();
 
 // SQL作成&実行
 // SQL作成&実行

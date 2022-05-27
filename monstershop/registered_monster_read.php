@@ -50,12 +50,14 @@ foreach ($result as $record) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>登録済モンスター情報一覧</title>
 </head>
-
 <body>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.0/js/jquery.tablesorter.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.0/css/theme.default.min.css">
   <fieldset>
     <legend>登録済モンスター情報一覧</legend>
     <a href="monstar_registration_form.php">入力画面</a>
-    <table>
+    <table class="tablesorter" id="monsterTable">
       <thead>
         <tr>
           <th>名前</th>
@@ -74,10 +76,14 @@ foreach ($result as $record) {
       </thead>
       <tbody>
         <?= $output ?>
-        <img src='./thumbnail.php'>
       </tbody>
     </table>
   </fieldset>
+  <script>
+    $(document).ready(function() { 
+	    $("#monsterTable").tablesorter();
+    });
+  </script>
 </body>
 
 </html>
