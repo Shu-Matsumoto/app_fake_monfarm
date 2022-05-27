@@ -29,44 +29,49 @@ $record = $stmt->fetch(PDO::FETCH_ASSOC);
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>登録済モンスター情報リスト（編集画面）</title>
+  <link rel="stylesheet" href="monster_registration_form_style.css">
 </head>
 
 <body>
-  <form action="registered_monster_update.php" method="POST">
-    <fieldset>
-      <legend>登録済モンスター情報リスト（編集画面）</legend>
-      <a href="registered_monster_read.php">一覧画面</a>
-      <div>
-        名前: <input type="text" name="name" value="<?= $record['name']?>" readonly>
+  <form action="registered_monster_update.php" method="POST" id="contact">
+    <div class="container">
+      <div class="head">  
+        <fieldset>
+          <legend>登録済モンスター情報リスト（編集画面）</legend>
+          <a href="registered_monster_read.php">一覧画面</a>
+          <div>
+            名前: <input type="text" name="name" value="<?= $record['name']?>" readonly>
+          </div>
+          <div>
+            誕生日: <input type="date" name="birthday" value="<?= $record['birthday'] ?>">
+          </div>
+          <div>
+            売値: <input type="number" name="sellingPrice" value="<?= $record['sellingPrice'] ?>">
+          </div>
+          <div>
+            ライフ: <input type="number" name="life" value="<?= $record['life'] ?>">
+          </div>
+          <div>
+            パワー: <input type="number" name="power" value="<?= $record['power'] ?>">
+          </div>
+          <div>
+            頑丈さ: <input type="number" name="durability" value="<?= $record['durability'] ?>">
+          </div>
+          <div>
+            命中: <input type="number" name="hit" value="<?= $record['hit'] ?>">
+          </div>
+          <div>
+            回避: <input type="number" name="evasion" value="<?= $record['evasion'] ?>">
+          </div>
+          <div>
+            賢さ: <input type="number" name="intelligence" value="<?= $record['intelligence'] ?>">
+          </div>
+          <div>
+            <button>submit</button>
+          </div>
+        </fieldset>
       </div>
-      <div>
-        誕生日: <input type="date" name="birthday" value="<?= $record['birthday'] ?>">
-      </div>
-      <div>
-        売値: <input type="number" name="sellingPrice" value="<?= $record['sellingPrice'] ?>">
-      </div>
-      <div>
-        ライフ: <input type="number" name="life" value="<?= $record['life'] ?>">
-      </div>
-      <div>
-        パワー: <input type="number" name="power" value="<?= $record['power'] ?>">
-      </div>
-      <div>
-        頑丈さ: <input type="number" name="durability" value="<?= $record['durability'] ?>">
-      </div>
-      <div>
-        命中: <input type="number" name="hit" value="<?= $record['hit'] ?>">
-      </div>
-      <div>
-        回避: <input type="number" name="evasion" value="<?= $record['evasion'] ?>">
-      </div>
-      <div>
-        賢さ: <input type="number" name="intelligence" value="<?= $record['intelligence'] ?>">
-      </div>
-      <div>
-        <button>submit</button>
-      </div>
-    </fieldset>
+    </div>
   </form>
 
 </body>
