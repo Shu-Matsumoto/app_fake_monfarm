@@ -21,4 +21,16 @@ function _connectToDB($dbServerAddress, $user, $pwd)
   return $pdo;
 }
 
+// ログイン状態のチェック関数
+function check_session_id($transitionPage)
+{
+  if (!isset($_SESSION["session_id"]) ||$_SESSION["session_id"] != session_id()) {
+    header('Location:'.$transitionPage);
+    exit();
+  } else {
+    session_regenerate_id(true);
+    $_SESSION["session_id"] = session_id();
+  }
+}
+
 ?>

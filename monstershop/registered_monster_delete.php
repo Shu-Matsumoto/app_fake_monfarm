@@ -1,6 +1,10 @@
 <?php
 include("./back/content/dataBaseCommon.php");
 
+session_start();
+// ログイン状態チェック (ログインしていない状態だとログイン画面へ遷移する)
+check_session_id("../login.php");
+
 var_dump($_GET);
 
 // 入力項目のチェック

@@ -1,6 +1,10 @@
 <?php
 include("./back/content/dataBaseCommon.php");
 
+session_start();
+// ログイン状態チェック (ログインしていない状態だとログイン画面へ遷移する)
+check_session_id("../login.php");
+
 // DB接続
 $pdo = ConnectToDB();
 
@@ -57,6 +61,7 @@ foreach ($result as $record) {
   <fieldset>
     <legend>登録済モンスター情報一覧</legend>
     <a href="monstar_registration_form.php">入力画面</a>
+    <a href="../logout.php">ログアウト</a>
     <table class="tablesorter" id="monsterTable">
       <thead>
         <tr>

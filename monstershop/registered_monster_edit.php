@@ -1,6 +1,10 @@
 <?php
 include("./back/content/dataBaseCommon.php");
 
+session_start();
+// ログイン状態チェック (ログインしていない状態だとログイン画面へ遷移する)
+check_session_id("../login.php");
+
 // id受け取り
 $name = $_GET['name'];
 
@@ -39,6 +43,7 @@ $record = $stmt->fetch(PDO::FETCH_ASSOC);
         <fieldset>
           <legend>登録済モンスター情報リスト（編集画面）</legend>
           <a href="registered_monster_read.php">一覧画面</a>
+          <a href="../logout.php">ログアウト</a>
           <div>
             名前: <input type="text" name="name" value="<?= $record['name']?>" readonly>
           </div>

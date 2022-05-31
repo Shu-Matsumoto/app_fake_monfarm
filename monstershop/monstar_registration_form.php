@@ -1,3 +1,10 @@
+<?php
+include("./back/content/dataBaseCommon.php");
+session_start();
+// ログイン状態チェック (ログインしていない状態だとログイン画面へ遷移する)
+check_session_id("../login.php");
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
   <head>
@@ -13,8 +20,8 @@
         <div class="head">
           <fieldset>
             <legend>モンスター情報登録</legend>
-            <a href="../index.html">ホーム画面</a>
             <a href="./registered_monster_read.php">一覧画面</a>
+            <a href="../logout.php">ログアウト</a>
             <div>
               名前: <input type="text" name="name">
             </div>

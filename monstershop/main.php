@@ -1,3 +1,10 @@
+<?php
+include("./back/content/dataBaseCommon.php");
+session_start();
+// ログイン状態チェック (ログインしていない状態だとログイン画面へ遷移する)
+check_session_id("../login.php");
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
   <head>
@@ -10,7 +17,10 @@
   <body>
     <header></header>
     <main>
-      <a href="../index.html">ホーム画面</a>
+      <div class="navigation_area">
+        <a href="./registered_monster_read.php">管理者画面</a>
+        <a href="../logout.php">ログアウト</a>
+      </div>
       <div class="monster_list_area">
         <div class="monsterList">
           <ul class="monsterListUl" id="id_monsterListUl">

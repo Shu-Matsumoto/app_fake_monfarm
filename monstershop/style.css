@@ -9,6 +9,12 @@ main{
   flex-direction: row;
 }
 
+.navigation_area{
+  width: 10%;
+  display: flex;
+  flex-direction: column;
+}
+
 .monster_list_area {
   width: 20%;
   min-height: 100vh;
